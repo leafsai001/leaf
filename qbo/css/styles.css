@@ -1,0 +1,902 @@
+
+/* 基本樣式設定 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    
+    
+    
+}
+/* 粉色背景 */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* 頂部導航 */
+.navbar {
+    background: linear-gradient(to bottom, #222, #000);
+    color: white;
+    padding: 5px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    
+}
+
+/* 底線的基礎設定（起始狀態） */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -3px; /* 控制線條與文字的距離 */
+    width: 0;
+    height: 1px;
+    background-color: #fff6de; /* 底線顏色 */
+    transition: all 0.4s ease; /* 控制動畫時間 */
+}
+
+/* 滑鼠懸停時底線展開 */
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+
+
+.navbar .logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    
+}
+
+/* 把menu-icon放到最右邊 */
+.menu-icon {
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    margin-left: auto;
+    z-index: 1100;  /* 確保按鈕位於選單之上 */
+}
+
+
+/* 導覽項目 */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;  /* 預設為橫向排列 */
+}
+
+.navbar .nav-links li {
+    margin: 0 15px;
+}
+
+.navbar .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+/* 響應式設計 - 小螢幕下 */
+@media (max-width: 768px) {
+    /* 顯示漢堡圖示 */
+    .menu-icon {
+        display: block;
+    }
+
+    /* 預設隱藏導航項目 */
+    .nav-links {
+        display: none;
+        flex-direction: column;  /* 設為縱向排列 */
+        justify-content: center; /* 垂直置中 */
+        align-items: center;     /* 水平置中 */
+        position: fixed;         /* 固定在視窗上 */
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.85); /* 半透明黑色背景 */
+        width: 100%;             /* 佔滿整個螢幕寬度 */
+        height: 100%;           /* 佔滿整個螢幕高度 */
+        z-index: 1000;           /* 確保選單在最上層 */
+        opacity: 0;              /* 預設隱藏 */
+        transition: opacity 0.5s ease, height 0.5s ease; /* 讓選單顯示隱藏更平滑 */
+    }
+
+    /* 當 active 類別被添加時，顯示導航項目 */
+    .nav-links.active {
+        display: flex;
+        opacity: 1;  /* 顯示選單 */
+        transform: translateY(0); /* 讓選單從上方滑入 */
+    }
+
+    /* 選單項目的間距 */
+    .navbar .nav-links li  {
+        margin: 20px 0;  /* 每個選單項目上下間距 */
+    }
+
+    .navbar .nav-links li a {
+        font-size: 1.8rem;  /* 增大字體 */
+        color: #fff;
+        text-transform: uppercase; /* 讓字母大寫，視覺更有層次 */
+        font-weight: 600;
+        
+    }
+}
+/* 讓選單項目淡入 */
+.nav-links li:nth-child(1) {
+    animation: fadeIn 0.3s ease-out 0.1s forwards;
+}
+
+.nav-links li:nth-child(2) {
+    animation: fadeIn 0.3s ease-out 0.2s forwards;
+}
+
+.nav-links li:nth-child(3) {
+    animation: fadeIn 0.3s ease-out 0.3s forwards;
+}
+
+.nav-links li:nth-child(4) {
+    animation: fadeIn 0.3s ease-out 0.4s forwards;
+}
+/* 漸變動畫效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+/* 圖片區域 (其他區域不變) */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* 其他圖片區塊樣式 */
+.gallery-item {
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    background-color: #fff;
+}
+
+.gallery-item img {
+    width: 70%;
+    height: auto;
+    border-radius: 10px;
+    transition: 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.enlarged {
+    transform: scale(2);
+  }
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    
+}
+
+/* 響應式設計 - 平板 */
+@media (max-width: 1024px) {
+    .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 響應式設計 - 手機 */
+@media (max-width: 768px) {
+    .image-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item p {
+        font-size: 0.9rem;
+    }
+}
+
+/* 左圖右字區塊 */
+.left-image-right-text {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    padding: 20px;
+    gap: 180px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* 小螢幕適配 */
+@media (max-width: 768px) {
+    .left-image-right-text {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-image img {
+        max-width: 100%;
+    }
+
+    .right-text {
+        text-align: center;
+        max-width: 100%;
+        margin-top: -150px;
+    }
+}
+
+/* 表單樣式 */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+
+button[type="submit"] {
+    width: auto;
+    background-color: #28a745;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.top{
+    position: relative;  /* 使得文字可以絕對定位於圖片之上 */
+    width: 100%;
+    overflow: hidden;  /* 確保圖片不會超出容器 */
+}
+.top img {
+    width: 100%;  /* 圖片寬度為100%，讓圖片撐滿容器 */
+    height: auto; /* 確保圖片自動調整比例 */
+    object-fit: cover; /* 使圖片覆蓋區域並保持比例 */
+    height: 800px;
+}
+
+/* RWD: 平板螢幕 */
+@media (max-width: 1024px) {
+    .top img {
+        height: 600px;  /* 平板螢幕時高度縮小 */
+    }
+}
+
+/* RWD: 手機螢幕 */
+@media (max-width: 768px) {
+    .top img {
+        height: 400px;  /* 手機螢幕時高度再縮小 */
+    }
+}
+
+.overlay-text {
+    position: absolute;    /* 使文字區塊可以絕對定位 */
+    top: 50%;              /* 讓文字在圖片的垂直中間 */
+    left: 50%;             /* 讓文字在圖片的水平中間 */
+    transform: translate(-50%, -50%); /* 精確對齊文字 */
+    color: rgb(255, 255, 255);         /* 文字顏色設為白色 */
+    text-align: center;   /* 文字居中 */
+    background-color: #3333339c;
+    padding: 20px;
+    
+}
+
+.overlay-text h1 {
+    font-size: 7rem; /* 大螢幕上的標題字體 */
+    margin: 0 0 10px 0;
+}
+
+.overlay-text p {
+    font-size: 1rem; /* 文字大小 */
+    margin: 0;
+}
+
+/* 響應式設計 - 中小型螢幕 */
+@media (max-width: 768px) {
+    .overlay-text {
+        max-width: 90%; /* 在小螢幕上讓文字區域最大寬度為 90% */
+        padding: 15px;
+    }
+
+    .overlay-text h1 {
+        font-size: 1.8rem; /* 在小螢幕上稍微縮小標題字體 */
+    }
+
+    .overlay-text p {
+        font-size: 0.9rem; /* 在小螢幕上縮小文字 */
+    }
+}
+
+/* 響應式設計 - 手機螢幕 */
+@media (max-width: 480px) {
+    .overlay-text {
+        max-width: 95%; /* 在手機上讓文字區域最大寬度為 95% */
+        padding: 10px;
+    }
+
+    .overlay-text h1 {
+        font-size: 1.6rem; /* 在手機上縮小標題字體 */
+    }
+
+    .overlay-text p {
+        font-size: 0.8rem; /* 在手機上縮小文字 */
+    }
+}
+
+main {
+    width: 80%;  /* 讓內容區域不會太寬 */
+    max-width: 1200px; /* 最大寬度限制 */
+    margin: auto;
+    padding: 20px;
+}
+#home{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    position: relative; /* 避免摩天輪壓住內容 */
+    z-index: 1;
+    
+}
+
+.home-content {
+    flex: 1;
+    max-width: 50%;
+    z-index: 2;
+}
+
+.home-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.home-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+@media (max-width: 768px) {
+    #home {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-content, .carousel {
+        max-width: 100%;  /* 讓內容區塊在手機上佔滿 */
+    }
+
+    .home-content h1 {
+        font-size: 2rem; /* 手機上縮小標題 */
+    }
+
+    .home-content p {
+        font-size: 1rem; /* 讓文字不會太大 */
+    }
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    background: #111;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding: 0;
+}
+
+.footer-links a {
+    color: #bbb;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #f8b400;
+}
+
+.social-links a{
+    color: #ddd;
+}
+
+
+.social-links a:hover{
+     color: #978fdb;
+}
+
+/* 表單樣式 */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+
+button[type="submit"] {
+    width: auto;
+    background-color: #28a745;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Example of fade-in effect */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
+
+/* Apply this class to elements you want to animate */
+
+/* 幻燈片區塊 */
+.slider-container {
+    position: relative;
+    width: 90%; /* 讓它根據螢幕大小變化 */
+    max-width: 1200px;
+    height: auto; /* 自動調整高度 */
+    aspect-ratio: 2 / 1; /* 維持原比例 */
+    overflow: hidden;
+    border-radius: 10px;
+    margin:80px auto;
+    
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.caption {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* 調整按鈕大小，避免過大 */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.prev {
+    left: 5px;
+}
+
+.next {
+    right: 5px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* 手機版調整 */
+@media (max-width: 600px) {
+    .caption {
+        font-size: 14px;
+        padding: 6px;
+    }
+    .prev, .next {
+        font-size: 20px;
+        padding: 6px;
+    }
+}
+
+
+/* 創意區塊設計 */
+.creative-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #B6A28E;
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    width: 750px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    margin:50px auto;
+    height:400px;
+}
+
+.creative-block:hover {
+    transform: scale(1.05); /* 鼠標懸停時放大 */
+    background-color: #B17457; /* 鼠標懸停時變色 */
+}
+
+/* 文字區塊樣式 */
+.text-content {
+    flex: 1;
+    padding-right: 20px;
+    max-width: 500px;
+}
+
+.text-content h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.text-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* RWD: 平板螢幕 (最大寬度 1024px) */
+@media (max-width: 1024px) {
+    .creative-block {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-content, .image-content {
+        max-width: 90%; /* 容器寬度為螢幕寬度的 90% */
+        padding: 10px;
+    }
+
+    .text-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .text-content p {
+        font-size: 0.9rem;
+    }
+
+    .text-content button {
+        padding: 8px 15px;
+    }
+
+    .image-content img {
+        max-width: 100%;
+    }
+}
+
+/* RWD: 手機螢幕 (最大寬度 768px) */
+@media (max-width: 768px) {
+    .text-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .text-content p {
+        font-size: 0.85rem;
+    }
+
+    .text-content button {
+        padding: 6px 12px;
+    }
+}
+
+
+/* 顯示更多文字區塊 */
+.extra-content {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+/* 按鈕樣式 */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 20px;
+    background-color: #E07B39;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #DCE4C9;
+    color: #603F26;
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+}
+
+/* 圖片區塊樣式 */
+.image-content img {
+    width: 350px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .creative-block {
+        flex-direction: column;
+        text-align: center;
+        max-width: 300px;
+    }
+
+    .text-content {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .image-content img {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+
+/* 🟢 優化：摩天輪圖片 (carousel) */
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; 
+}
+@media (max-width: 768px) {
+    #carousel {
+      display: none;
+      
+    }
+  }
+
+@media (max-width: 968px) {
+    #carousel {
+      margin:0px 0px 250px 100px;
+      
+    }
+  }
+
+/* 讓圖片大小隨螢幕變化 */
+.carousel img {
+    position: absolute;
+    width: 25%;
+    max-width: 130px;
+    height: auto;
+    border-radius: 50%;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    cursor: pointer;
+}
+
+
+
+/* 滑鼠懸停放大 */
+.carousel img:hover {
+    transform: scale(2.5) !important;
+    z-index: 10;
+}
+
+
+/* 當圖片是 active（被點擊）時放大 */
+.carousel img.active {
+    transform: rotate(90deg) scale(2.5) !important; /* 旋轉範圍變小，限制旋轉90度 */
+    z-index: 10;
+}
+
+
+
+
+/* Lightbox（燈箱） */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+/* 燈箱內的圖片 */
+.lightbox img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+
+/* 當燈箱啟動時 */
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+/* 燈箱效果 */
+.lightboxes {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+.lightboxes img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+.lightboxes:target {
+    display: flex;
+}
+
+/* 關閉按鈕 */
+.close-btn {
+    position: absolute;
+top: 20px;
+right: 30px;
+font-size: 40px;
+color: white;
+text-decoration: none;
+font-weight: bold;
+background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)); /* 漸變背景 */
+padding: 5px 15px; /* 改變內邊距，讓按鈕更大 */
+border-radius: 30px; /* 增加圓角，讓按鈕看起來更圓滑 */
+box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* 加上陰影 */
+transition: background 0.3s ease, transform 0.3s ease; /* 增加動畫效果 */
+
+}
+.close-btn:hover {
+    background: #ebe5c2cb;
+    transform: scale(1.1); /* 鼠標懸停時，按鈕放大 */
+}
+
+/* 🟢 📌 RWD - 平板版（768px 以下） */
+@media (max-width: 768px) {
+    .lightbox img {
+        max-width: 90%; /* 讓圖片在平板上更大 */
+        max-height: 75%;
+    }
+
+    .close-btn {
+        font-size: 35px; /* 關閉按鈕稍微變小 */
+        top: 15px;
+        right: 20px;
+        padding: 8px;
+    }
+}
+
+/* 🟢 📌 RWD - 手機版（480px 以下） */
+@media (max-width: 480px) {
+    .lightbox img {
+        max-width: 95%; /* 在手機上幾乎全螢幕 */
+        max-height: 70%;
+    }
+
+    .close-btn {
+        font-size: 30px; /* 手機上關閉按鈕再縮小 */
+        top: 10px;
+        right: 15px;
+        padding: 6px;
+    }
+}
+#about h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+
+  
