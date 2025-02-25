@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的網站</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    
+
+    <!-- 導覽列 -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#"><img style="width: 75px;" src="LEAF_LOGO2.png"></a>
+            </div>
+            <div class="menu-icon" id="menu-icon">
+                &#9776;  <!-- 漢堡圖示 -->
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#">首頁</a></li>
+                <li><a href="#isme" class="scroll-link">關於</a></li>
+                <li><a href="#">服務</a></li>
+                <li><a href="#">聯絡我們</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- 內容區域 -->
+    <div class="top">
+        <img src="COVER.JPEG" alt="背景圖片">
+        <div class="overlay-text">
+            <h1>歡迎來到我的網站</h1>
+            <p>探索我的設計與開發作品，展現創意與技術的結合</p>
+        </div>
+    </div>
+    
+    <!-- 新增的 3 欄圖片區域 -->
+    <div id="gallery" class="image-gallery">
+        <div class="gallery-item">
+            <a href="#lightbox1">
+            <img src="https://picsum.photos/400/300?random=1" alt="圖片1">
+            </a>
+            <p>網頁設計：現代化響應式網站<span style="color:#D2665A;">(使用wordpress製作)</span></p>
+        </div>
+        <div class="gallery-item">
+            <a href="#lightbox2">
+            <img src="ps_poto.png" alt="圖片2">
+            </a>
+            <p>平面設計：Photoshop 影像處理與視覺設計</p>
+        </div>
+        <div class="gallery-item">
+            <a href="#lightbox3">
+            <img src="logo1.png" alt="圖片3">
+            </a>
+            <p>品牌設計：Illustrator 插畫與 Logo 設計</p>
+        </div>
+    </div>
+
+     <!-- 燈箱區域 -->
+     <div id="lightbox1" class="lightboxes">
+        <a href="#" class="close-btn">&times;</a>
+        <img src="carting.jpg" alt="圖片1">
+    </div>
+
+    <div id="lightbox2" class="lightboxes">
+        <a href="#gallery" class="close-btn">&times;</a>
+        <img src="ps_poto.png" alt="圖片2">
+    </div>
+
+    <div id="lightbox3" class="lightboxes">
+        <a href="#gallery" class="close-btn">&times;</a>
+        <img src="logo1.png" alt="圖片3">
+    </div>
+
+    <!-- 新增的左圖右字區塊 -->
+<div id="isme" class="left-image-right-text">
+    <div class="left-image">
+        <img src="IMG_0858.JPEG" style="width: 400px;" alt="左圖">
+    </div>
+    <div class="right-text">
+        <h2>關於我</h2>
+        <p>你好，我是葉柏伸，一名專注於網頁設計與前端開發的設計師。</p>
+        <p>我熱愛將創意轉化為實際作品，並致力於提供美觀且易用的使用者體驗。</p>
+        <p>熟悉的技能包括：HTML、CSS、JavaScript 以及 wordpress、Photoshop 等設計工具。</p>
+    </div>
+</div>
+<!-- 新增的幻燈片區塊 -->
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide">
+            <img src="INTERNATIONAL BAKERY_photo.png" alt="圖片1">
+            <div class="caption">參與過的烘焙設備展設計</div>
+        </div>
+        <div class="slide">
+            <img src="brand_des.png" alt="圖片2">
+            <div class="caption">品牌視覺設計</div>
+        </div>
+        <div class="slide">
+            <img src="logo.png" alt="圖片3">
+            <div class="caption">前端互動動畫</div>
+        </div>
+    </div>
+    <!-- 幻燈片控制器 -->
+    <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+    <a class="next" onclick="moveSlide(1)">&#10095;</a>
+</div>
+
+ <!-- 創意區塊 -->
+ <div class="creative-block" id="creativeBlock">
+    <div class="text-content">
+        <h2>我的設計理念</h2>
+        <p>設計不只是視覺，更是一種體驗。我專注於將使用者需求轉化為清晰直觀的界面，並透過創新設計提升產品價值。</p>
+        <button id="toggleButton">顯示更多</button>
+        <div id="extraContent" class="extra-content">
+            <p>從概念發想到實際執行，我堅持簡潔而有效的設計原則，結合當代 UI/UX 趨勢，打造高品質的數位產品。</p>
+        </div>
+    </div>
+    <div class="image-content">
+        <img src="lines-6975227_1280.jpg" alt="設計圖片">
+    </div>
+</div>
+
+
+
+<!-- 歡迎介紹 -->
+<main>
+    <section id="home">
+        <div class="home-content">
+            <h1>歡迎來到我的網站！</h1>
+            <p>這是我的第一個網頁，展示基本的結構和樣式。</p>
+            <button id="showMoreBtn">顯示更多資訊</button>
+            <div id="moreInfo" style="display: none;">
+                <p>這是一段隱藏的額外資訊，只有當你點擊按鈕時才會顯示。</p>
+            </div>
+        </div>
+        <div class="carousel" id="carousel"></div>
+    </section>   
+
+    <section id="about">
+        <h2>關於我</h2>
+        <p><em>簡約，不只是風格，而是一種設計理念。</em></p>
+        <p>我是 <strong>葉柏伸</strong>，專注於 <strong>品牌設計</strong> 與 <strong>網站開發</strong>。  
+            <br>我相信設計不只是視覺，而是體驗。
+            <br>我致力於透過<strong>簡單、直覺且有層次的設計</strong>，  
+           為品牌打造獨特且富有價值的視覺形象。</p>
+    </section>
+
+    <section id="services">
+        <h2>服務</h2>
+        <ul>
+            <li>網頁設計</li>
+            <li>應用程式開發</li>
+            <li>數位行銷</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>聯絡我們</h2>
+        <p>有任何問題，請隨時聯絡我！</p>
+    </section>
+</main>
+
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+</div>
+    <canvas id="warpCanvas"></canvas>
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 MyBrand. All rights reserved.</p>
+            <div class="logo">
+                <a href="#"><img style="width:70px;" src="LEAF_LOGO2.png"></a>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#">隱私政策</a></li>
+                <li><a href="#">服務條款</a></li>
+                <li><a href="#">聯絡我們</a></li>
+            </ul>
+        </div>
+                
+    </footer>
+    <script src="js/pinkbaground.js"></script>        
+    <script src="js/script.js"></script>
+    <script src="js/slide.js"></script>
+    <script src="js/Ferris_Wheel.js"></script>
+    <script src="js/scroll-link.js"></script>
+
+</body>
+</html>

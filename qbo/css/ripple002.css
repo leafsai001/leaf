@@ -1,0 +1,351 @@
+/* 基本樣式 */
+*, *::before, *::after {
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(180deg, #2f2f2f, #000000);
+  min-height: 100vh;
+  perspective: 100vw;
+  perspective-origin: 50% calc(50% - 35vw);
+  overflow: hidden;
+}
+
+/* 葉子的樣式 */
+.leaf {
+  position: absolute;
+  top: -100px;
+  width: 100px;
+  animation: fall 3s ease-in-out forwards, float 1s infinite alternate ease-in-out; /* 合併兩個動畫 */
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.3s ease,filter 1.5s ease;; /* 添加過渡動畫 */
+}
+
+.leaf:hover {
+  filter: drop-shadow(0 0 15px rgba(215, 255, 215, 0.8)); /* 讓圖片周圍有發光的陰影效果 */
+  transform: scale(1.1); /* 使圖片輕微放大，增強效果 */
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(-5px) rotate(-7deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-7deg);
+  }
+  100% {
+    transform: translateY(-5px) rotate(-7deg);
+  }
+}
+
+
+
+/* 隨機化每片葉子的掉落效果 */
+.leaf:nth-child(odd) {
+  animation-delay: calc(-0.5s + (random() * 1.5s)); /* 隨機延遲 */
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-180px) rotate(0deg);
+    opacity: 0;
+    top: -100px;
+  }
+  
+  100% {
+    transform: translateY(86vh) rotate(0deg);
+    opacity: 0.9;
+    top: 75vh; /* 設置為視窗中心，根據需要調整 */
+  }
+}
+
+/* 波紋的基本樣式 */
+.wave {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -10%);
+  transform-style: preserve-3d;
+  pointer-events: none; /* 確保波紋不會干擾點擊 */
+  visibility: hidden; /* 預設隱藏波紋 */
+  z-index: 5;
+  
+}
+
+
+.wave:nth-child(1) {
+  width: 750px;
+  height: 750px;
+  left: 14%;
+  --waveDelay: 1.8s;
+}
+.wave:nth-child(2) {
+  width: 700px;
+  height: 700px;
+  left: 50%;
+  --waveDelay: 0.81s;
+}
+.wave:nth-child(3) {
+  width: 650px;
+  height: 650px;
+  left: 86%;
+  --waveDelay: 2.82s;
+}
+
+.wave > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 
+0 -10px 30px rgba(0, 172, 255, 0.3),  /* 輕微的藍色陰影，模擬水的浮動 */
+0 10px 30px rgba(0, 172, 255, 0.3) inset, /* 內部的漸變藍色陰影 */
+0 0 40px rgba(0, 191, 255, 0.5),  /* 更強烈的水波動感，透明藍色 */
+0 10px 50px rgba(0, 191, 255, 0.2) inset; /* 內部的柔和藍色光暈，增強水波效果 */
+filter: drop-shadow(0 0 10px #c2dcffc9); /* 讓圖片周圍有發光的陰影效果 */
+
+
+animation-fill-mode: both;
+  transform: rotateX(90deg);
+  animation: waveEffect 3s infinite linear;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.wave > div:nth-child(even) {
+  --waveAngle: 90deg;
+}
+.wave > div:nth-child(odd) {
+  --waveAngle: -90deg;
+}
+
+
+/* 設置每個波紋的延遲 */
+.wave > div:nth-child(1) {
+  animation-delay: calc(var(--waveDelay) + 0s);
+}
+.wave > div:nth-child(2) {
+  animation-delay: calc(var(--waveDelay) + 0.1s);
+}
+.wave > div:nth-child(3) {
+  animation-delay: calc(var(--waveDelay) + 0.25s);
+}
+.wave > div:nth-child(4) {
+  animation-delay: calc(var(--waveDelay) + 0.4s);
+}
+.wave > div:nth-child(5) {
+  animation-delay: calc(var(--waveDelay) + 0.55s);
+}
+.wave > div:nth-child(6) {
+  animation-delay: calc(var(--waveDelay) + 0.7s);
+}
+
+/* 波紋動畫 */
+@keyframes waveEffect {
+  0% {
+      transform: rotateX(var(--waveAngle)) scale(0);
+      opacity: 1;
+  }
+  50%, 100% {
+      transform: rotateX(var(--waveAngle)) scale(2);
+      opacity: 0;
+  }
+}
+
+
+/* 提示框樣式 */
+.tooltip {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden; /* 初始隱藏 */
+  pointer-events: none;
+  transition: opacity 1.8s ease, visibility 0.3s ease; /* 過渡效果 */
+  font-size: 100px;
+  
+}
+
+/* 葉子懸停時顯示提示框 */
+.leaf:hover + .tooltip {
+  opacity: 1;
+  visibility: visible; /* 顯示提示框 */
+}
+
+/* 總容器 */
+.text-container {
+  font-size: 100px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  white-space: nowrap; /* 防止文字換行 */
+  overflow: hidden; /* 隱藏被打字機效果超出框架的文字 */
+}
+
+/* 每個字母的動畫 */
+.text-container span {
+  display: inline-block; /* 讓每個字母可以單獨控制 */
+  opacity: 0; /* 初始隱藏 */
+  animation: fadeIn 1s forwards;
+}
+
+/* 文字逐個浮現的動畫效果 */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+/* 使用延遲讓字母逐步顯示 */
+.text-container span:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.text-container span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.text-container span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  animation: starAnimation 5s linear infinite;
+}
+
+/* 定義星星的動畫 */
+@keyframes starAnimation {
+  0% {
+      opacity: 0;
+      transform: scale(0);
+  }
+  50% {
+      opacity: 1;
+      transform: scale(1);
+  }
+  100% {
+      opacity: 0;
+      transform: scale(0);
+  }
+}
+
+/* 響應式設計 (RWD) */
+@media screen and (max-width: 1024px) {
+  .leaf {
+    width: 60px; /* 縮小葉子大小 */
+  }
+  
+  .wave {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    perspective: 120vw;
+  }
+  
+  .leaf {
+    width: 100px; /* 進一步縮小葉子 */
+    top:-13vh;  /* 讓葉子從較高的位置掉落 */
+    transform: translateX(-80%);
+  }
+  
+  .wave {
+    width: 400px;
+    height: 400px;
+  }
+  
+  .text-container {
+    font-size: 50px; /* 縮小文字大小 */
+  }
+  
+  .tooltip {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .leaf {
+    width: 120px; /* 更小的葉子尺寸 */
+  }
+  
+  .wave {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .text-container {
+    font-size: 30px;
+  }
+  
+  .tooltip {
+    font-size: 30px;
+  }
+}
+
+/*文字逐漸浮出動畫*/
+.wrapper {
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  width: 100%; /* 讓 wrapper 佔滿整個視窗寬度 */
+  height: 100%; /* 讓 wrapper 佔滿整個畫面 */
+  text-align: center; /* 讓內部文字置中 */
+  
+}
+
+.att1 {
+	position: relative;
+	float: none;
+	color: #ffffffe0;
+	font-family: 'Inconsolata', Consolas, monospace;
+	font-size: 4em;
+	margin-bottom: 300px;
+}
+.att1 span{
+  position: absolute;
+	top: 0;
+	right: 0;
+	background: #1d1f20;
+	width: 100%;
+	border-left: .1em solid transparent;
+	-webkit-animation: typing 3s steps(16) forwards,
+										 cursor 1s infinite;
+	animation: typing 3s steps(16) forwards,
+						 cursor 1s infinite;
+}
+/* Animation */
+@-webkit-keyframes typing{
+	from { width: 100%;}
+	to { width: 0;}
+}
+@-webkit-keyframes cursor{
+	50% { border-color: white;}
+}
+@keyframes typing{
+	from{ width: 100%;}
+	to{ width: 0;}
+}
+@keyframes cursor{
+	50% { border-color: white;}
+}
+
+
+
